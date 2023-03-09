@@ -6,6 +6,8 @@ import * as process from 'process';
 import * as bcrypt from 'bcrypt';
 import { AuthDto } from './dto/auth.dto';
 import { Accounts } from '../accounts/accounts.model';
+import { TokenService } from '../token/token.service';
+import { TwoFactorTokenDto } from './dto/two-factor-token.dto';
 
 @Injectable()
 export class AuthService {
@@ -14,11 +16,25 @@ export class AuthService {
     private usersService: UsersService,
     private jwtService: JwtService,
     private accountsService: AccountsService,
+    private tokenService: TokenService,
   ) {
   }
 
   async login(dto: AuthDto) {
     const account = await this.validateUser(dto);
+    if (account.twoFactor) {
+      await this.tokenService.TFAToken(account);
+      throw new HttpException('To your email send auth-token', HttpStatus.PERMANENT_REDIRECT);
+    }
+    return this.generateToken(account);
+  }
+
+  async loginTwoFactor(dto: TwoFactorTokenDto) {
+    const result = await this.tokenService.getTFAToken(dto.token);
+    if (!result) {
+      throw new HttpException('User is not a found', HttpStatus.FORBIDDEN);
+    }
+    const account = await this.accountsService.getAccountById(result.userId);
     return this.generateToken(account);
   }
 
@@ -30,6 +46,7 @@ export class AuthService {
     const hashPassword = await bcrypt.hash(dto.password, 7);
     const account = await this.accountsService.createUser({ ...dto, password: hashPassword });
     await this.usersService.createUser({ username: dto.email.slice(0, 5) }, { id: account.id });
+    await this.tokenService.createAuthToken(account);
     return this.generateToken(account);
   }
 

@@ -9,6 +9,10 @@ import { Accounts } from '../accounts/accounts.model';
 
 
 interface UserCreationAttrs {
+  accountId: number;
+  username: string;
+  avatar: string;
+  pin: number | null;
 }
 
 @Table({ tableName: 'users' })
@@ -16,7 +20,7 @@ export class Users extends Model<Users, UserCreationAttrs> {
   @Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
   id: number;
   @ForeignKey(() => Accounts)
-  @Column({ type: DataType.INTEGER})
+  @Column({ type: DataType.INTEGER })
   accountId: number;
   @Column({ type: DataType.STRING, allowNull: false })
   username: string;

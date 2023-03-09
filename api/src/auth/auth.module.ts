@@ -4,6 +4,7 @@ import { UsersModule } from 'src/users/users.module';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { AccountsModule } from '../accounts/accounts.module';
+import { TokenModule } from '../token/token.module';
 
 @Module({
   controllers: [AuthController],
@@ -12,6 +13,7 @@ import { AccountsModule } from '../accounts/accounts.module';
     signOptions: {
       expiresIn: '60d',
     },
-  }), UsersModule, AccountsModule]
+  }), UsersModule, AccountsModule, TokenModule],
 })
-export class AuthModule {}
+export class AuthModule {
+}

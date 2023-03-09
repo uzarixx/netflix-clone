@@ -2,6 +2,7 @@ import { Body, Controller, Post, UsePipes } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { ValidationPipe } from '../pipes/validation.pipe';
 import { AuthDto } from './dto/auth.dto';
+import { TwoFactorTokenDto } from './dto/two-factor-token.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -18,5 +19,11 @@ export class AuthController {
   @Post('/login')
   login(@Body() dto: AuthDto) {
     return this.authService.login(dto);
+  }
+
+  @UsePipes(ValidationPipe)
+  @Post('/login-two-factor')
+  loginTwoFactor(@Body() dto: TwoFactorTokenDto) {
+    return this.authService.loginTwoFactor(dto);
   }
 }
