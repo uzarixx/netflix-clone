@@ -24,7 +24,7 @@ export class Tokens extends Model<Tokens, TokensCreationAttrs> {
   userId: number;
   @Column({ type: DataType.STRING })
   token: string;
-  @Column({ type: DataType.STRING })
+  @Column({ type: DataType.DATE })
   expiresAt: string;
   @Column({ type: DataType.BOOLEAN, defaultValue: true })
   isVerify: boolean;

@@ -10,6 +10,16 @@ import { Users } from './users/users.model';
 import { Accounts } from './accounts/accounts.model';
 import { TokenModule } from './token/token.module';
 import { Tokens } from './token/token.model';
+import { ContentModule } from './content/content.module';
+import { CategoryModule } from './category/category.module';
+import { Content } from './content/content.model';
+import { CategoryOfContent } from './category/category-of-content.model';
+import { Category } from './category/category.model';
+import { SeriesModule } from './series/series.module';
+import { Episodes } from './series/episodes.model';
+import { Seasons } from './series/seasons.model';
+import { FilmsModule } from './films/films.module';
+import { Films } from './films/films.model';
 
 @Module({
   imports: [
@@ -26,7 +36,17 @@ import { Tokens } from './token/token.model';
       process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [Users, Accounts, Tokens],
+      models: [
+        Users,
+        Accounts,
+        Tokens,
+        Content,
+        CategoryOfContent,
+        Category,
+        Episodes,
+        Seasons,
+        Films,
+      ],
       autoLoadModels: true,
       logging: false,
     }),
@@ -45,6 +65,10 @@ import { Tokens } from './token/token.model';
     AccountsModule,
     UsersModule,
     TokenModule,
+    ContentModule,
+    CategoryModule,
+    SeriesModule,
+    FilmsModule,
   ],
 })
 export class AppModule {

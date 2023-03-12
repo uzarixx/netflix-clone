@@ -7,6 +7,7 @@ import { Accounts } from '../accounts/accounts.model';
 import { ValidationPipe } from '../pipes/validation.pipe';
 import { DeletePinDto } from './dto/delete-pin.dto';
 import { CreateUserDto } from './dto/create-user.dto';
+import { DeleteUserDto } from './dto/delete-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -37,8 +38,8 @@ export class UsersController {
   @UsePipes(ValidationPipe)
   @UseGuards(JwtAuthGuard)
   @Delete('/delete/:id')
-  deleteUser(@Param('id') id: number, @UserAuth() accounts: Accounts) {
-    return this.usersService.deleteUser(id, accounts);
+  deleteUser(@Param('id') id: number, @UserAuth() accounts: Accounts, @Body() dto: DeleteUserDto) {
+    return this.usersService.deleteUser(id, accounts, dto);
   }
 
 

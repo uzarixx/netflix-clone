@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { TokenService } from './token.service';
 import { TokenController } from './token.controller';
 import { MailModule } from '../services/mail/mail.module';
@@ -9,7 +9,7 @@ import { AccountsModule } from '../accounts/accounts.module';
 @Module({
   providers: [TokenService],
   controllers: [TokenController],
-  imports: [MailModule, SequelizeModule.forFeature([Tokens]), AccountsModule],
+  imports: [MailModule, SequelizeModule.forFeature([Tokens]), forwardRef(() => AccountsModule)],
   exports: [TokenService],
 })
 export class TokenModule {

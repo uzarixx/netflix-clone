@@ -28,6 +28,7 @@ export class MailService {
         console.log(err);
       });
   }
+
   public twoFactorAuthentication(
     text: string,
     to: string,
@@ -40,6 +41,27 @@ export class MailService {
           'Two Factor Authentication - netflix-clone',
         text: 'Two Factor Authentication - netflix-clone',
         html: `<b>your code - ${text}</b>`,
+      })
+      .then((success) => {
+        console.log(success);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  public twoFactorDisabled(
+    text: string,
+    to: string,
+  ): void {
+    this.mailerService
+      .sendMail({
+        to,
+        from: 'Netflix clone <is3.andrei.2@gmail.com>',
+        subject:
+          'Two Factor Authentication Disabled - netflix-clone',
+        text: 'Two Factor Authentication Disabled - netflix-clone',
+        html: `<b>disable code - ${text}</b>`,
       })
       .then((success) => {
         console.log(success);
