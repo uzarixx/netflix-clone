@@ -1,0 +1,160 @@
+.selectUserContainer {
+  height: 80vh;
+  width: 100%;
+
+  header {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    svg {
+      margin-left: 3%;
+      width: 130px;
+      height: 30px;
+    }
+  }
+
+  .selectUserWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    h3 {
+      font-size: 40px;
+      font-weight: 400;
+      margin-bottom: 20px;
+    }
+
+    .usersContainer {
+      display: flex;
+      gap: 20px;
+      cursor: pointer;
+      animation: .4s linear 0s animationEase;
+
+      .usersWrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: .3s;
+
+        img {
+          border-radius: 4px;
+        }
+
+        &:hover {
+          scale: 1.2;
+        }
+
+        p {
+          margin-top: 12px;
+          font-size: 15px;
+          font-weight: 400;
+          color: rgba(255, 255, 255, 0.62);
+        }
+
+        .lockSvg {
+          margin-top: 5px;
+
+          svg {
+            width: 15px;
+            height: 15px;
+          }
+        }
+
+      }
+
+      .usersActiveWrapper {
+        position: relative;
+
+        img {
+          opacity: .3;
+        }
+
+        span {
+          position: absolute;
+          top: 33%;
+          left: 45%;
+          transform: translate(-33%, -45%);
+          padding: 5px;
+          border: 2px solid white;
+          border-radius: 50%;
+          width: 30px;
+          height: 30px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          svg {
+            width: 20px;
+            height: 20px;
+          }
+        }
+      }
+
+      .addProfile {
+        max-width: 95px;
+        max-height: 123px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+
+        span {
+          width: 95px;
+          height: 95px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        p {
+          margin-top: 12px;
+          font-size: 15px;
+          font-weight: 400;
+          color: rgba(255, 255, 255, 0.62);
+        }
+      }
+    }
+
+    @keyframes animationEase {
+      from {
+        transform: translateY(100px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    button {
+      margin-top: 40px;
+      animation: .7s linear 0s animationButton;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: rgba(255, 255, 255, 0.4);
+      padding: 5px 20px;
+    }
+
+    .activeButton {
+      background: white;
+      color: black;
+      font-weight: 600;
+    }
+
+    @keyframes animationButton {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  }
+}

@@ -1,0 +1,85 @@
+.loginContainer {
+  position: relative;
+
+  .imageBg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    opacity: .35;
+  }
+
+  .loginWrapper {
+    header {
+      min-height: 90px;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0, transparent);
+      width: 100%;
+
+      svg {
+        margin-left: 3%;
+        width: 167px;
+        height: 45px;
+      }
+    }
+
+    .formContainer {
+      margin: 0 auto;
+      padding: 60px 68px 40px;
+      min-height: 660px;
+      background-color: rgba(0, 0, 0, .75);
+      max-width: 450px;
+      border-radius: 4px;
+
+      h2 {
+        font-size: 32px;
+        margin-bottom: 28px;
+        font-weight: 500;
+      }
+
+      .errorAuth {
+        padding: 10px 20px;
+        background: #e87c03;
+        margin-bottom: 16px;
+        border-radius: 4px;
+
+        p {
+          font-size: 14px;
+          font-weight: 400;
+          a {
+            color: white;
+            font-weight: 400;
+          text-decoration: underline;
+          }
+        }
+      }
+    }
+
+    .needHelp {
+      cursor: pointer;
+      width: 100%;
+      text-align: right;
+      display: block;
+      font-size: 13px;
+      color: #B3B3B3;
+      font-weight: 400;
+    }
+
+    .newToNetflix {
+      display: flex;
+      margin-top: 16px;
+      color: #737373;
+      font-weight: 400;
+
+      p {
+        margin-right: 1%;
+      }
+
+      span {
+        color: white;
+        cursor: pointer;
+      }
+    }
+  }
+}

@@ -1,0 +1,115 @@
+.header {
+  position: fixed;
+  left: 0;
+  min-height: 64px;
+  backdrop-filter: blur(30px);
+  width: 100%;
+  z-index: 1;
+
+  .headerWrapper {
+    padding: 0 60px;
+    display: flex;
+    align-items: center;
+    min-height: 64px;
+  }
+
+  .leftHeader {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    svg {
+      height: 25px;
+      width: 87px;
+      margin-right: 32px;
+    }
+
+    ul {
+      display: flex;
+      gap: 24px;
+
+      li {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .rightHeader {
+    display: flex;
+    align-items: center;
+
+    svg {
+      width: 24px;
+      height: 24px;
+      fill: white;
+      margin-right: 20px;
+      cursor: pointer;
+    }
+
+    .userBlock {
+      cursor: pointer;
+      position: relative;
+
+      img {
+        border-radius: 4px;
+        width: 40px;
+        height: 40px;
+
+      }
+
+      .clue {
+        position: absolute;
+        font-size: 11px;
+        bottom: -30px;
+        left: -20px;
+        width: 82px;
+        padding: 2px 0;
+        border-radius: 4px;
+        text-align: center;
+        background: #4A5259;
+        opacity: 0;
+        scale: .5;
+        transition: .2s;
+      }
+
+      &:hover {
+        .clue {
+          scale: 1;
+          opacity: 1;
+        }
+      }
+
+
+      .settings {
+        position: absolute;
+        bottom: -112px;
+        right: 0;
+        background: rgb(20, 20, 20);
+        border-radius: 4px;
+        opacity: 0;
+        scale: 0;
+        transition: .3s;
+
+        ul {
+          border-radius: 4px;
+
+          li {
+            padding: 6px 16px;
+            font-size: 15px;
+
+            &:hover {
+              background: rgb(100, 100, 100);
+            }
+          }
+        }
+      }
+
+      .settingsOpen {
+        opacity: 1;
+        scale: 1;
+      }
+    }
+
+
+  }
+}

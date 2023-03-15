@@ -10,7 +10,7 @@ import { AccountsModule } from '../accounts/accounts.module';
   providers: [UsersService],
   controllers: [UsersController],
   exports: [UsersService],
-  imports: [SequelizeModule.forFeature([Users]), JwtModule, AccountsModule],
+  imports: [JwtModule.register({ signOptions: { expiresIn: '60d', }, }),SequelizeModule.forFeature([Users]), JwtModule, AccountsModule],
 })
 export class UsersModule {
 }

@@ -63,12 +63,12 @@ export class AuthService {
   private async validateUser(userDto: AuthDto) {
     const user = await this.accountsService.getAccountByEmail(userDto.email);
     if (!user) {
-      throw new UnauthorizedException('Invalid data');
+      throw new UnauthorizedException('Sorry, we can\'t find an account with this email address. ');
     }
     const passwordEquals = await bcrypt.compare(userDto.password, user.password);
     if (user && passwordEquals) {
       return user;
     }
-    throw new UnauthorizedException('Invalid data');
+    throw new UnauthorizedException('Incorrect password.');
   }
 }

@@ -1,54 +1,34 @@
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import LoginLayout from './components/Layouts/LoginLayout';
+import { useAppDispatch, useAppSelector } from './store/store';
+import { fetchAuthAccount, fetchAuthUser } from './store/counter/userSlice';
+import SelectUserLayout from './components/Layouts/SelectUserLayout';
+import MainLayout from './components/Layouts/MainLayout';
 
-import React, { useState } from 'react';
-
-import logo from './logo.svg';
-
-function App() {
-  const [count, setCount] = useState(0);
+const App = () => {
+  const dispatch = useAppDispatch();
+  const accountSelector = useAppSelector((root) => root.userSlice.account);
+  const userSelector = useAppSelector((root) => root.userSlice.user);
+  const preloaderUser = useAppSelector((root) => root.userSlice.isPendingUser);
+  const preloaderAccount = useAppSelector((root) => root.userSlice.isPendingAccount);
+  useEffect(() => {
+    dispatch(fetchAuthUser());
+    dispatch(fetchAuthAccount());
+  }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p className="header">
-          🚀 Vite + React + Typescript 🤘 & <br />
-          Eslint 🔥+ Prettier
-        </p>
-
-        <div className="body">
-          <button onClick={() => setCount((count) => count + 1)}>
-            🪂 Click me : {count}
-          </button>
-
-          <p> Don&apos;t forgot to install Eslint and Prettier in Your Vscode.</p>
-
-          <p>
-            Mess up the code in <code>App.tsx </code> and save the file.
-          </p>
-          <p>
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
-            {' | '}
-            <a
-              className="App-link"
-              href="https://vitejs.dev/guide/features.html"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Vite Docs
-            </a>
-          </p>
-        </div>
-      </header>
-    </div>
+    <>
+      {preloaderUser || preloaderAccount ? <>Loading...</> :
+        <>
+          {accountSelector ?
+            <>
+              {userSelector ? <MainLayout /> : <SelectUserLayout />}
+            </>
+            :
+            <LoginLayout />}
+        </>}
+    </>
   );
-}
+};
 
 export default App;

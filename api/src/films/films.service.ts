@@ -17,12 +17,4 @@ export class FilmsService {
     const film = await this.filmsRepository.create(dto);
     return film;
   };
-
-  async getFilmByContentId(id: number) {
-    const film = await this.contentService.getFilmByContentId(id);
-    if (!film.length) {
-      throw new HttpException('Film is not a found', HttpStatus.NOT_FOUND);
-    }
-    return film;
-  }
 }

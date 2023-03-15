@@ -1,0 +1,140 @@
+.video {
+  position: relative;
+  padding-bottom: 40%;
+  @media (max-width: 660px) {
+    padding-bottom: 60%;
+  }
+
+  .info {
+    position: absolute;
+    left: 60px;
+    top: 40%;
+
+
+    h3 {
+      font-size: 60px;
+      font-weight: 400;
+      margin-bottom: 32px;
+      @media (max-width: 1520px) {
+        display: none;
+      }
+    }
+
+    h4 {
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 1.334;
+      max-width: 520px;
+      @media (max-width: 1520px) {
+        display: none;
+      }
+    }
+
+    .buttons {
+      display: flex;
+      margin-top: 32px;
+      @media (max-width: 1520px) {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      svg {
+        width: 40px;
+        height: 40px;
+        margin-right: 5px;
+        @media (max-width: 1520px) {
+          margin-right: 1px;
+          width: 24px;
+          height: 24px;
+        }
+      }
+
+      .buttonPlay {
+        display: flex;
+        align-items: center;
+        background-color: rgb(245, 245, 245);
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px;
+        font-size: 28px;
+        padding: 8px 16px;
+        margin-right: 16px;
+        min-width: 64px;
+        border-radius: 4px;
+        font-weight: 600;
+        @media (max-width: 1520px) {
+          max-width: 120px;
+          font-size: 18px;
+          max-height: 35px;
+          padding: 4px 8px;
+          justify-content: center;
+          margin: 0;
+        }
+      }
+
+      .moreInfo {
+        display: flex;
+        align-items: center;
+        font-size: 28px;
+        background: #6d6d6eb3;
+        border-radius: 4px;
+        color: white;
+        padding: 8px 16px;
+        @media (max-width: 1520px) {
+          max-width: 120px;
+          font-size: 18px;
+          max-height: 35px;
+          padding: 4px 8px;
+
+        }
+
+        svg {
+          fill: white;
+        }
+      }
+    }
+
+
+  }
+
+  .buttonSound {
+    position: absolute;
+    right: 0;
+    bottom: 25%;
+    display: flex;
+    align-items: center;
+
+    button {
+      background: transparent;
+      border: 2px solid rgb(69, 79, 91);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        border: 2px solid white;
+      }
+    }
+
+    span {
+      display: block;
+      margin-left: 16px;
+      padding: 8px 24px 8px 12px;
+      text-align: left;
+      background-color: rgba(51, 51, 51, 0.6);
+      border-left: 2px solid white;
+    }
+  }
+
+  video {
+    z-index: -1;
+    position: absolute;
+    top: -65px;
+    width: 100%;
+    @media (max-width: 768px) {
+      top: -20px;
+    }
+  }
+
+}

@@ -5,6 +5,9 @@ import { ContentCreateDto } from './dto/content-create.dto';
 import { CategoryService } from '../category/category.service';
 import { Category } from '../category/category.model';
 import { Films } from '../films/films.model';
+import { Seasons } from '../series/seasons.model';
+import { Episodes } from '../series/episodes.model';
+import { Sequelize } from 'sequelize';
 
 @Injectable()
 export class ContentService {
@@ -36,33 +39,53 @@ export class ContentService {
     return content;
   }
 
-  async getFilmByContentId(id: number) {
-    const { films } = await this.contentRepository.findOne({ where: { id }, include: [{ model: Films }] });
-    return films;
+  async getContentById(id: number) {
+    const result = await this.contentRepository.findOne({
+      where: { id },
+      include: [{ model: Films }, { model: Seasons, include: [{ model: Episodes }] }],
+    });
+    return result;
+  }
+
+  async getRandomFilm() {
+    const result = await this.contentRepository.findAll({
+      where: { isFilm: true },
+      attributes: ['id'],
+    });
+    const randomId = (id: Content[]) => {
+      return id[Math.floor(Math.random() * id.length)];
+    };
+    const number = randomId(result);
+    const film = await this.contentRepository.findOne({
+      where: { id: number.id },
+    });
+    return film;
   }
 
   async getContent() {
     const [action, drama] = await Promise.all([
-        this.contentRepository.findAll({
-          include: [
-            {
-              model: Category,
-              attributes: ['id', 'param'],
-              where: { param: 'action' },
-            },
-          ],
-        }),
-        this.contentRepository.findAll({
-          include: [
-            {
-              model: Category,
-              attributes: ['id', 'param'],
-              where: { param: 'drama' },
-            },
-          ],
-        }),
+        this.getCategory('action'),
+        this.getCategory('drama'),
       ],
     );
     return { action, drama };
+  }
+
+  private getCategory(param: string) {
+    const result = this.contentRepository.findAll({
+      include: [
+        {
+          model: Category,
+          attributes: ['id', 'param'],
+          where: { param },
+        },
+      ],
+    });
+    return result;
+  }
+
+  async findContentSeriesById(id: number) {
+    const content = await this.contentRepository.findOne({ where: { id }, include: [{ model: Seasons }] });
+    return content;
   }
 }

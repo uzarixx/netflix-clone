@@ -7,7 +7,9 @@ import { Accounts } from '../accounts/accounts.model';
 import { ValidationPipe } from '../pipes/validation.pipe';
 import { DeletePinDto } from './dto/delete-pin.dto';
 import { CreateUserDto } from './dto/create-user.dto';
-import { DeleteUserDto } from './dto/delete-user.dto';
+import { LoginToUserDto } from './dto/login-to-user.dto';
+import { GetUserDto } from './dto/get-user.dto';
+import { UpdateUsernameDto } from './dto/update-username.dto';
 
 @Controller('users')
 export class UsersController {
@@ -19,6 +21,13 @@ export class UsersController {
   @Put('/update-pin')
   updatePinUser(@Body() dto: AddPinDto, @UserAuth() accounts: Accounts) {
     return this.usersService.updatePinUser(dto, accounts);
+  }
+
+  @UsePipes(ValidationPipe)
+  @UseGuards(JwtAuthGuard)
+  @Put('/update-username')
+  updateUsername(@Body() dto: UpdateUsernameDto, @UserAuth() accounts: Accounts) {
+    return this.usersService.updateUsername(dto, accounts)
   }
 
   @UsePipes(ValidationPipe)
@@ -35,11 +44,24 @@ export class UsersController {
     return this.usersService.createUser(dto, accounts);
   }
 
-  @UsePipes(ValidationPipe)
   @UseGuards(JwtAuthGuard)
   @Delete('/delete/:id')
-  deleteUser(@Param('id') id: number, @UserAuth() accounts: Accounts, @Body() dto: DeleteUserDto) {
-    return this.usersService.deleteUser(id, accounts, dto);
+  deleteUser(@Param('id') id: number, @UserAuth() accounts: Accounts) {
+    return this.usersService.deleteUser(id, accounts);
+  }
+
+  @UsePipes(ValidationPipe)
+  @UseGuards(JwtAuthGuard)
+  @Post('/login-user')
+  loginToUser(@UserAuth() accounts: Accounts, @Body() dto: LoginToUserDto) {
+    return this.usersService.loginToUser(accounts, dto);
+  }
+
+  @UsePipes(ValidationPipe)
+  @UseGuards(JwtAuthGuard)
+  @Post('/get-user')
+  getUser(@UserAuth() accounts: Accounts, @Body() dto: GetUserDto) {
+    return this.usersService.userVerify(dto, accounts)
   }
 
 

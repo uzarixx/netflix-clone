@@ -26,4 +26,11 @@ export class AccountsController {
   disableTwoFactor(@Param('token') token: string) {
     return this.accountsService.disableTwoFactor(token);
   }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('/get-me')
+  getAuthUser(@UserAuth() account: Accounts) {
+    return this.accountsService.getAuthUser(account);
+  }
+
 }

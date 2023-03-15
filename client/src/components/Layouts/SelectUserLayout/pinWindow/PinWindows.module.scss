@@ -1,0 +1,38 @@
+.pinWindowContainer {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  backdrop-filter: blur(50px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+
+  span {
+    font-size: 20px;
+    font-weight: 300;
+    color: white;
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+  }
+
+  svg {
+    width: 160px;
+    height: 50px;
+  }
+
+  .pinWindowWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 5px;
+
+    svg {
+      margin-bottom: 20px;
+    }
+  }
+}

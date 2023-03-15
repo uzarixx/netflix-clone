@@ -11,7 +11,7 @@ import { Content } from '../content/content.model';
 
 interface SeasonsCreationAttrs {
   name: string;
-  numberSeason: string;
+  numberSeason: number;
   contentId: number;
 }
 
@@ -22,7 +22,7 @@ export class Seasons extends Model<Seasons, SeasonsCreationAttrs> {
   @Column({ type: DataType.STRING, allowNull: false })
   name: string;
   @Column({ type: DataType.INTEGER, allowNull: false })
-  numberSeason: string;
+  numberSeason: number;
   @ForeignKey(() => Content)
   @Column({ type: DataType.INTEGER, allowNull: false })
   contentId: number;

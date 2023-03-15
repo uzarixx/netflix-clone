@@ -1,0 +1,51 @@
+.inputWrapper {
+  position: relative;
+
+  .input {
+    background: #333;
+    padding: 16px 20px 0;
+    outline: none;
+    border: none;
+    line-height: 50px;
+    height: 50px;
+    color: #fff;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .errorActive {
+    border-bottom: 2px solid #e87c03;
+  }
+
+
+  label {
+    position: absolute;
+    left: 20px;
+    color: #8C8C8C;
+    font-weight: 400;
+    transition: font .1s ease, top .1s ease, transform .1s ease;
+    top: 20%;
+  }
+
+
+  .input:focus ~ label {
+    font-size: 11px;
+    top: 8%;
+  }
+
+  .labelActive {
+    font-size: 11px;
+    top: 8%;
+  }
+
+  p {
+    font-size: 13px;
+    font-weight: 400;
+    margin-bottom: -6px;
+    padding: 6px 3px;
+    color: #e87c03;
+    transform: translateY(-50%);
+  }
+}

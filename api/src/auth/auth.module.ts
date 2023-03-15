@@ -11,7 +11,7 @@ import { TokenModule } from '../token/token.module';
   providers: [AuthService],
   imports: [JwtModule.register({
     signOptions: {
-      expiresIn: '60d',
+      expiresIn: '1d',
     },
   }), UsersModule, AccountsModule, TokenModule],
 })

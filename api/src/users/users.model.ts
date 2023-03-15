@@ -13,6 +13,7 @@ interface UserCreationAttrs {
   username: string;
   avatar: string;
   pin: number | null;
+  isPin: boolean;
 }
 
 @Table({ tableName: 'users' })
@@ -28,4 +29,6 @@ export class Users extends Model<Users, UserCreationAttrs> {
   avatar: string;
   @Column({ type: DataType.INTEGER, defaultValue: null })
   pin: number;
+  @Column({ type: DataType.BOOLEAN, defaultValue: false })
+  isPin: boolean;
 }

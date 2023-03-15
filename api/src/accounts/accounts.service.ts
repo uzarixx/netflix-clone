@@ -2,6 +2,7 @@ import { forwardRef, HttpException, HttpStatus, Inject, Injectable } from '@nest
 import { Accounts } from './accounts.model';
 import { InjectModel } from '@nestjs/sequelize';
 import { TokenService } from '../token/token.service';
+import { Users } from '../users/users.model';
 
 @Injectable()
 export class AccountsService {
@@ -69,6 +70,18 @@ export class AccountsService {
     account.twoFactor = false;
     await account.save();
     return account;
+  }
+
+  async getAuthUser(account: Accounts) {
+    const accountResponse = await this.accountsRepository.findOne({
+      where: { id: account.id },
+      include: [{ model: Users, attributes: { exclude: ['pin'] } }],
+      attributes: { exclude: ['password'] },
+    });
+    if (!accountResponse) {
+      throw new HttpException('User is not a found', HttpStatus.BAD_REQUEST);
+    }
+    return accountResponse;
   }
 
 
