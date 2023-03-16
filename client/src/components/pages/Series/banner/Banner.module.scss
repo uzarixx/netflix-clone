@@ -1,0 +1,44 @@
+.bannerContainer {
+  position: relative;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .bannerInfo {
+    position: absolute;
+    padding-left: 169px;
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: 700px;
+
+    h3 {
+      font-size: 24px;
+      font-weight: 500;
+      margin: 10px 0;
+    }
+
+    .info {
+      display: flex;
+      gap: 8px;
+      color: #A3A3A3;
+      font-size: 14px;
+      font-weight: 400;
+      margin-bottom: 16px;
+
+      span {
+        padding: 0 5px;
+        border: 1px solid #A3A3A3;
+      }
+    }
+
+    h4 {
+      font-size: 16px;
+      line-height: 22px;
+      font-weight: 400;
+    }
+  }
+
+
+}

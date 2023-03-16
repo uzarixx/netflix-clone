@@ -11,6 +11,7 @@ import UserService from '../../../services/fetchServices/userFetch';
 import { useAppDispatch } from '../../../store/store';
 import { fetchAuthAccount } from '../../../store/counter/userSlice';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export const imageBg = 'https://assets.nflxext.com/ffe/siteui/vlv3/5523db5a-e2b2-497f-a88b-61f175c3dbad/209471d1-7f9a-4624-aa69-d7e10668ff4a/UA-en-20230306-popsignuptwoweeks-perspective_alpha_website_small.jpg';
 
@@ -23,6 +24,7 @@ type Inputs = {
   password: string,
 };
 const LoginLayout: FC = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [errorMessage, setErrorMessage] = useState('');
   const [errorRegisterMessage, setErrorRegisterMessage] = useState('');
@@ -42,6 +44,9 @@ const LoginLayout: FC = () => {
       dispatch(fetchAuthAccount());
     } catch (e: any) {
       console.log(e);
+      if (e.response.status === 308) {
+        navigate('two-factor');
+      }
       setErrorMessage(e.response.data.message.message);
       setErrorRegisterMessage(e.response.data.message);
     }
@@ -50,6 +55,13 @@ const LoginLayout: FC = () => {
     setIsLogin(!isLogin);
     setErrorRegisterMessage('');
     setErrorMessage('');
+  };
+  const onClickError = () => {
+    if (isLogin) {
+      changeLoginType();
+    } else {
+      navigate('forgot-password');
+    }
   };
   return (
     <div className={styles.loginContainer}>
@@ -66,9 +78,9 @@ const LoginLayout: FC = () => {
               <div className={styles.errorAuth}>
                 <p>
                   {errorMessage === 'Incorrect password.' ? incorrectPassword : accountIsCreate}
-                  <Link to={'/'}>
+                  <a onClick={onClickError}>
                     {errorMessage === 'Incorrect password.' ? 'Reset your password' : 'create a new account'}
-                  </Link>
+                  </a>
                 </p>
               </div>
             }

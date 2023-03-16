@@ -68,7 +68,7 @@ export class ContentService {
         this.getCategory('drama'),
       ],
     );
-    return { action, drama };
+    return [{ contentCategory: 'Action', content: action }, { contentCategory: 'Drama', content: drama }];
   }
 
   private getCategory(param: string) {
@@ -78,8 +78,10 @@ export class ContentService {
           model: Category,
           attributes: ['id', 'param'],
           where: { param },
+
         },
       ],
+      limit: 20,
     });
     return result;
   }

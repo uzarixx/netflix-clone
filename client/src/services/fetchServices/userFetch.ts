@@ -57,4 +57,10 @@ export default class UserService {
       userId, pin,
     });
   }
+
+  static async loginTwoFactor(token: string) {
+    return $api.post('/auth/login-two-factor', {
+      token,
+    });
+  }
 }

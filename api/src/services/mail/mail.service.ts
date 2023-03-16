@@ -19,7 +19,7 @@ export class MailService {
         subject:
           'Registration netflix-clone',
         text: 'welcome to netflix-clone',
-        html: `<b>your link - ${text}</b>`,
+        html: `<b>your activation code - ${text}</b>`,
       })
       .then((success) => {
         console.log(success);

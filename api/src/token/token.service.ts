@@ -13,19 +13,7 @@ export class TokenService {
   }
 
 
-  async createAuthToken(accounts: Accounts) {
-    const tokenGen = uuid.v4();
-    const expiresAt = Date.now() + 1000 * 60 * 5;
-    const { token } = await this.tokensRepository.create({
-      userId: accounts.id,
-      token: tokenGen,
-      expiresAt: expiresAt,
-    });
-    await this.mailService.authToken(`http://localhost:5000/token/activate/${token}`, accounts.email);
-    return token;
-  }
-
-  async TFAToken(accounts: Accounts) {
+  async TFAToken(accounts: Accounts, isLogin: boolean) {
     const tokenGen = Math.floor(Math.random() * 9000 + 1000);
     const expiresAt = Date.now() + 1000 * 60 * 5;
     const { token } = await this.tokensRepository.create({
@@ -34,7 +22,12 @@ export class TokenService {
       expiresAt: expiresAt,
       isVerify: false,
     });
-    await this.mailService.twoFactorAuthentication(token, accounts.email);
+    if (isLogin) {
+      await this.mailService.twoFactorAuthentication(token, accounts.email);
+    } else {
+      await this.mailService.authToken(token, accounts.email);
+    }
+    return 'success';
   }
 
   async verifyToken(value: string) {

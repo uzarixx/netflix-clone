@@ -47,10 +47,12 @@
         p {
           font-size: 14px;
           font-weight: 400;
+
           a {
+            cursor: pointer;
             color: white;
             font-weight: 400;
-          text-decoration: underline;
+            text-decoration: underline;
           }
         }
       }

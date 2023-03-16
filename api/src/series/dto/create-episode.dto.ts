@@ -9,6 +9,8 @@ export class CreateEpisodeDto {
   readonly description: string;
   @IsString({ message: 'Is not a string' })
   readonly videoLink: string;
+  @IsString({ message: 'Is not a string' })
+  readonly imageLink: string;
   @IsNumber({}, { message: 'Is not a number' })
   readonly numberEpisode: number;
   @IsNumber({}, { message: 'Is not a number' })

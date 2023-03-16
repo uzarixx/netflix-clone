@@ -5,6 +5,7 @@ import NetflixLogo from '../../../ui/icons/NetflixLogo';
 import UserService from '../../../../services/fetchServices/userFetch';
 import { useAppDispatch } from '../../../../store/store';
 import { fetchAuthUser } from '../../../../store/counter/userSlice';
+import PinInputComponent from '../../../ui/inputs/pinInput';
 
 interface props {
   id: number;
@@ -38,34 +39,7 @@ const PinWindow: FC<props> = ({ id, onClose }) => {
       <div className={styles.pinWindowWrapper}>
         <NetflixLogo />
         <h2>Enter your PIN to access this profile.</h2>
-        <PinInput
-          length={4}
-          initialValue=''
-          secret
-          secretDelay={100}
-          type='numeric'
-          onChange={(value) => setPin(value)}
-          inputMode='number'
-          style={{ padding: '10px', margin: '10px' }}
-          inputStyle={{
-            borderColor: 'white',
-            color: 'white',
-            fontSize: '40px',
-            width: '90px',
-            height: '90px',
-            margin: '10px',
-          }}
-          inputFocusStyle={{
-            borderColor: 'white',
-            color: 'white',
-            fontSize: '40px',
-            width: '90px',
-            height: '90px',
-            scale: '1.1',
-          }}
-          autoSelect={true}
-          regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
-        />
+        <PinInputComponent setPin={setPin} />
         {message && <p>{message}</p>}
       </div>
     </div>

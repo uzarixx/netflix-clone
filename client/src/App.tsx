@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import LoginLayout from './components/Layouts/LoginLayout';
 import { useAppDispatch, useAppSelector } from './store/store';
 import { fetchAuthAccount, fetchAuthUser } from './store/counter/userSlice';
 import SelectUserLayout from './components/Layouts/SelectUserLayout';
 import MainLayout from './components/Layouts/MainLayout';
+import { Route, Routes } from 'react-router-dom';
+import TwoFactor from './components/pages/TwoFactor';
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -25,7 +27,11 @@ const App = () => {
               {userSelector ? <MainLayout /> : <SelectUserLayout />}
             </>
             :
-            <LoginLayout />}
+            <Routes>
+              <Route path={'/'} element={<LoginLayout />} />
+              <Route path={'/two-factor'} element={<TwoFactor />} />
+            </Routes>
+          }
         </>}
     </>
   );

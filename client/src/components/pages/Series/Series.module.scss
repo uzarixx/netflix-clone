@@ -1,0 +1,57 @@
+.episodes {
+  padding: 25px 169px;
+
+  .title {
+    display: flex;
+    align-items: center;
+
+    h3 {
+      font-size: 30px;
+      font-weight: 400;
+    }
+
+    span {
+      margin: 15px 0 10px 9px;
+      padding-left: 15px;
+      border-left: 1px solid #a3a3a3;
+      color: #a3a3a3;
+      font-size: 20px;
+    }
+  }
+
+  .episodesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    .episodesWrapper {
+      flex: 0 1 calc(20.05% - 12px);
+      max-width: 310px;
+      cursor: pointer;
+
+      img {
+        display: block;
+        width: 100%;
+      }
+
+      .title {
+        margin-top: 5px;
+        display: flex;
+        justify-content: space-between;
+
+        b {
+          color: #a3a3a3;
+          font-size: 16px;
+          font-weight: 400;
+        }
+      }
+      h4 {
+        margin: 12px 0;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 18px;
+        color: #a3a3a3;
+      }
+    }
+  }
+}

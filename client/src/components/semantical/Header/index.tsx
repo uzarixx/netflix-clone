@@ -3,10 +3,12 @@ import styles from './Header.module.scss';
 import NetflixLogo from '../../../components/ui/icons/NetflixLogo';
 import Avatar from '../../../assets/png/avatar-1.png';
 import Search from '../../ui/icons/Search';
-import { fetchAuthUser, setAccount, setUser } from '../../../store/counter/userSlice';
+import { setAccount, setUser } from '../../../store/counter/userSlice';
 import { useAppDispatch } from '../../../store/store';
+import { useNavigate } from 'react-router-dom';
 
 const Header: FC = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [openSettings, setOpenSettings] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -37,7 +39,9 @@ const Header: FC = () => {
     <header className={styles.header}>
       <div className={styles.headerWrapper}>
         <div className={styles.leftHeader}>
-          <NetflixLogo />
+          <div onClick={() => navigate('/')}>
+            <NetflixLogo />
+          </div>
           <ul>
             <li>My List</li>
             <li>Movies</li>

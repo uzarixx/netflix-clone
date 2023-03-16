@@ -37,6 +37,7 @@ export class SeriesService {
       numberEpisode: dto.numberEpisode,
       videoLink: dto.videoLink,
       length: dto.length,
+      imageLink: dto.imageLink,
     });
     return episode;
   }

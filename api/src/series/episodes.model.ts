@@ -14,6 +14,7 @@ interface EpisodesCreationAttrs {
   name: string;
   description: string;
   videoLink: string;
+  imageLink: string;
   length: number;
 }
 
@@ -34,6 +35,8 @@ export class Episodes extends Model<Episodes, EpisodesCreationAttrs> {
   description: string;
   @Column({ type: DataType.STRING, allowNull: false })
   videoLink: string;
+  @Column({ type: DataType.STRING, allowNull: false })
+  imageLink: string;
   @Column({ type: DataType.INTEGER, allowNull: false })
   length: number;
 
