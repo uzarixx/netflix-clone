@@ -6,6 +6,7 @@ import SelectUserLayout from './components/Layouts/SelectUserLayout';
 import MainLayout from './components/Layouts/MainLayout';
 import { Route, Routes } from 'react-router-dom';
 import TwoFactor from './components/pages/TwoFactor';
+import UnathorizeLayout from './components/Layouts/UnathorizeLayout';
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -27,10 +28,7 @@ const App = () => {
               {userSelector ? <MainLayout /> : <SelectUserLayout />}
             </>
             :
-            <Routes>
-              <Route path={'/'} element={<LoginLayout />} />
-              <Route path={'/two-factor'} element={<TwoFactor />} />
-            </Routes>
+            <UnathorizeLayout />
           }
         </>}
     </>

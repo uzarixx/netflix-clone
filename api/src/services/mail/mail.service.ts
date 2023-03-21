@@ -59,9 +59,34 @@ export class MailService {
         to,
         from: 'Netflix clone <is3.andrei.2@gmail.com>',
         subject:
-          'Two Factor Authentication Disabled - netflix-clone',
-        text: 'Two Factor Authentication Disabled - netflix-clone',
-        html: `<b>disable code - ${text}</b>`,
+          'Two Factor Authentication Disabled',
+        text: 'Two Factor Authentication Disabled',
+        html: `
+              <b>Disable code - ${text}</b>
+              <br/>
+              <b>You can enter this code to this <a href='http://localhost:3000/disabled-two-factor'>link</a></b>
+              `,
+      })
+      .then((success) => {
+        console.log(success);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  public forgotToken(
+    text: string,
+    to: string,
+  ): void {
+    this.mailerService
+      .sendMail({
+        to,
+        from: 'Netflix clone <is3.andrei.2@gmail.com>',
+        subject:
+          'Reset your password',
+        text: 'Reset your password - netflix-clone',
+        html: `<b>Reset link - ${text}</b>`,
       })
       .then((success) => {
         console.log(success);

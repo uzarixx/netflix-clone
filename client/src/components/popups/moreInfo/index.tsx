@@ -12,7 +12,6 @@ import { useNavigate } from 'react-router-dom';
 import { IMoreInfo } from '../../../constants/types';
 
 
-
 const MoreInfo: FC = () => {
   const navigate = useNavigate();
   const [sound, setSound] = useState(true);
@@ -30,9 +29,10 @@ const MoreInfo: FC = () => {
     dispatch(setMoreInfoData(props));
   };
 
-  const openSeries = (id: number | undefined) => () => {
-    navigate(`/series/${id}`)
-  }
+  const openVideo = (id: number | undefined, isFilm: boolean | undefined) => () => {
+    isFilm ? navigate(`/film/view/${id}`) : navigate(`/series/${id}`);
+  };
+
 
   return (
     <div className={`${styles.moreInfoContainer} ${isOpen && styles.moreInfoContainerOpen}`} onClick={onCloseMoreInfo}>
@@ -46,7 +46,8 @@ const MoreInfo: FC = () => {
           <div className={styles.infoWrapper}>
             <h3>{useData?.name}</h3>
             <div className={styles.buttons}>
-              <button className={styles.playButton} onClick={useData?.isFilm ? () => {} : openSeries(useData?.id)}><Play /> Play</button>
+              <button className={styles.playButton} onClick={openVideo(useData?.id, useData?.isFilm)}><Play /> Play
+              </button>
               <button className={styles.plusButton}>+</button>
               <button className={styles.likeButton}><Like /></button>
             </div>
@@ -66,7 +67,7 @@ const MoreInfo: FC = () => {
           {moreLike?.map((el, i) =>
             <div key={i} className={styles.videosContainer}>
               {i === 1 && el.content.map((el) =>
-                <div className={styles.videosWrapper} onClick={onOpenNextContent(el)}>
+                <div className={styles.videosWrapper} onClick={onOpenNextContent(el)} key={el.id}>
                   <div className={styles.imageContainer}>
                     <img src={el.previewImage} alt='film-image-preview' />
                     <p>{el.name}</p>

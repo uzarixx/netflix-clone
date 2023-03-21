@@ -11,8 +11,10 @@ import { setMoreInfoData, setMoreInfoOpen } from '../../../store/counter/popupsS
 import Play from '../icons/Play';
 import Like from '../icons/Like';
 import { IMoreInfo } from '../../../constants/types';
+import { useNavigate } from 'react-router-dom';
 
 const ContentSlider: FC = () => {
+  const navigate = useNavigate();
   const content = useAppSelector((root) => root.contentSlice.content);
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -21,6 +23,10 @@ const ContentSlider: FC = () => {
   const openMoreInfo = (props: IMoreInfo) => () => {
     dispatch(setMoreInfoOpen(true));
     dispatch(setMoreInfoData(props));
+  };
+
+  const openVideo = (id: number, isFilm: boolean) => () => {
+    isFilm ? navigate(`/film/view/${id}`) : navigate(`/series/${id}`);
   };
   return (
     <>
@@ -41,9 +47,11 @@ const ContentSlider: FC = () => {
                   <div className={styles.onHover}>
                     <h4>{el.name}</h4>
                     <div className={styles.buttons}>
-                      <button className={styles.play}>
-                        <Play />
-                      </button>
+                      <div onClick={(e) => e.stopPropagation()}>
+                        <button className={styles.play} onClick={openVideo(el.id, el.isFilm)}>
+                          <Play />
+                        </button>
+                      </div>
                       <button className={styles.like}>
                         <Like />
                       </button>

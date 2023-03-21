@@ -1,0 +1,21 @@
+.header {
+  padding: 0 45px;
+  background: black;
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 50px;
+
+  svg {
+    width: 117px;
+    height: 31px;
+  }
+
+  img {
+    border-radius: 4px;
+    width: 32px;
+    height: 32px;
+  }
+}
+

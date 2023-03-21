@@ -50,59 +50,6 @@
     }
   }
 
-  .editPin {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.33);
-    padding-bottom: 10px;
-    .submitButton {
-      margin-top: 10px;
-      background: white;
-      max-width: 100px;
-      width: 100%;
-      height: 30px;
-      color: black;
-      font-weight: 500;
-      letter-spacing: 1.3px;
-    }
-    h4 {
-      font-weight: 400;
-      font-size: 16px;
-      margin-top: 10px;
-    }
-
-    .checkbox {
-      margin-top: 10px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      cursor: pointer;
-
-      span {
-        width: 15px;
-        height: 15px;
-        border: 1px solid white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-left: 3px;
-
-
-        span {
-          width: 7px;
-          height: 7px;
-          margin-left: -1px;
-          background: white;
-        }
-
-      }
-
-      p {
-        font-size: 13px;
-        font-weight: 400;
-      }
-
-    }
-  }
-
   .buttons {
     margin-top: 25px;
     display: flex;

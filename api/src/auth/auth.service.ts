@@ -8,6 +8,7 @@ import { AuthDto } from './dto/auth.dto';
 import { Accounts } from '../accounts/accounts.model';
 import { TokenService } from '../token/token.service';
 import { TwoFactorTokenDto } from './dto/two-factor-token.dto';
+import { LoginAndUpdatePasswordDto } from './dto/login-and-update-password.dto';
 
 @Injectable()
 export class AuthService {
@@ -49,6 +50,14 @@ export class AuthService {
     await this.usersService.createUser({ username: dto.email.slice(0, 5) }, { id: account.id });
     await this.tokenService.TFAToken(account, false);
     throw new HttpException('To your email send auth-token', HttpStatus.PERMANENT_REDIRECT);
+  }
+
+  async loginAndUpdatePassword(dto: LoginAndUpdatePasswordDto) {
+    const account = await this.tokenService.findAccountByToken(dto.token);
+    const hashPassword = await bcrypt.hash(dto.password, 7);
+    account.password = hashPassword;
+    await account.save();
+    return this.generateToken(account);
   }
 
   private async generateToken(accounts: Accounts) {

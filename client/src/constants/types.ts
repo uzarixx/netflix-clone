@@ -10,6 +10,13 @@ export interface ISeries {
   rating: 0;
   updateAt: string;
   yearCategory: number;
+
+  films: [{
+    contentId: number,
+    id: number,
+    length: number,
+    videoLink: string;
+  }];
   seasons: [{
     id: number, name: string, numberSeason: number, contentId: number, episodes: [{
       id: number,
@@ -36,4 +43,18 @@ export interface IMoreInfo {
   publicationDate: string;
   rating: number;
   yearCategory: number;
+}
+
+
+export interface IUser {
+
+  user: {
+    id: number,
+    accountId: number,
+    username: string,
+    avatar: string,
+    pin: null | number,
+    isPin: boolean
+  }
+
 }

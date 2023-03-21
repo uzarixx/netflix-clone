@@ -3,6 +3,7 @@ import { AuthService } from './auth.service';
 import { ValidationPipe } from '../pipes/validation.pipe';
 import { AuthDto } from './dto/auth.dto';
 import { TwoFactorTokenDto } from './dto/two-factor-token.dto';
+import { LoginAndUpdatePasswordDto } from './dto/login-and-update-password.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -25,5 +26,11 @@ export class AuthController {
   @Post('/login-two-factor')
   loginTwoFactor(@Body() dto: TwoFactorTokenDto) {
     return this.authService.loginTwoFactor(dto);
+  }
+
+  @UsePipes(ValidationPipe)
+  @Post('/login-and-update-password')
+  loginAndUpdatePassword(@Body() dto: LoginAndUpdatePasswordDto) {
+    return this.authService.loginAndUpdatePassword(dto);
   }
 }

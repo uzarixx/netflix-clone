@@ -17,7 +17,7 @@ const FormInput: FC<props> = ({ placeholder, name, type, error, value }) => {
       <input className={`${styles.input} ${error && error[name]?.message && styles.errorActive}`}
              type={type || 'text'} {...register(name)} id={placeholder + name} />
       <label className={`${value && styles.labelActive}`} htmlFor={placeholder + name}>{placeholder}</label>
-      <p className={styles.error}>{error && error[name]?.message}</p>
+      {error && <p className={styles.error}>{error && error[name]?.message}</p>}
     </div>
   );
 };

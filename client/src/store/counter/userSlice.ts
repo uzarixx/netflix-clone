@@ -43,8 +43,12 @@ export interface CounterState {
   isPendingAccount: boolean;
   isPendingUser: boolean;
   user: {
-    userId: number,
-    accountId: number
+    id: number,
+    accountId: number,
+    username: string,
+    avatar: string,
+    pin: null | number,
+    isPin: boolean
   } | null;
 }
 
@@ -64,6 +68,13 @@ const userSlice = createSlice({
     },
     setUser: (state, action) => {
       state.user = action.payload;
+    },
+    setIsPinUser: (state, action) => {
+      const { id, isPin } = action.payload;
+      const user = state?.account?.users.find((user) => user.id === id);
+      if (user) {
+        user.isPin = isPin;
+      }
     },
   },
   extraReducers: (builder: ActionReducerMapBuilder<CounterState>) => {
@@ -86,6 +97,5 @@ const userSlice = createSlice({
 
 
 export default userSlice.reducer;
-
-export const { setAccount, setUser } = userSlice.actions;
+export const { setAccount, setUser, setIsPinUser } = userSlice.actions;
 

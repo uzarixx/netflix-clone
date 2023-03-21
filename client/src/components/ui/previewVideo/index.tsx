@@ -7,6 +7,7 @@ import Info from '../icons/Info';
 import FilmsService from '../../../services/fetchServices/filmsService';
 import { useAppDispatch } from '../../../store/store';
 import { setMoreInfoData, setMoreInfoOpen } from '../../../store/counter/popupsSlice';
+import { useNavigate } from 'react-router-dom';
 
 interface IFilm {
   previewVideo: string;
@@ -23,6 +24,7 @@ interface IFilm {
 
 
 const PreviewVideo: FC = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [sound, setSound] = useState(true);
   const [film, setFilm] = useState<IFilm>();
@@ -37,6 +39,11 @@ const PreviewVideo: FC = () => {
     dispatch(setMoreInfoOpen(true));
     dispatch(setMoreInfoData(film));
   };
+
+  const openVideo = (id: number | undefined) => () => {
+    navigate(`/film/view/${id}`);
+  };
+
   return (
     <div className={styles.video}>
       <video
@@ -49,7 +56,7 @@ const PreviewVideo: FC = () => {
         <h3>{film?.name}</h3>
         <h4>{film?.description}</h4>
         <div className={styles.buttons}>
-          <button className={styles.buttonPlay}><Play /> Play</button>
+          <button className={styles.buttonPlay} onClick={openVideo(film?.id)}><Play /> Play</button>
           <button className={styles.moreInfo} onClick={onClickOpen}><Info /> More Info</button>
         </div>
       </div>

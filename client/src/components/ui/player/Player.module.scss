@@ -1,0 +1,207 @@
+.activeVideoWrapper {
+  cursor: none;
+}
+
+.videoWrapper {
+  display: flex;
+  position: relative;
+  z-index: 99;
+
+  .mainStop {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.68);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s;
+
+    .infoWrapper {
+      width: 70%;
+      padding-bottom: 15%;
+
+      p {
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      h3 {
+        font-weight: bold;
+        font-size: 3em;
+        color: red;
+        margin: 10px 0;
+      }
+    }
+
+  }
+
+  .mainStopActive {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .back {
+    position: absolute;
+    left: 40px;
+    top: 50px;
+    cursor: pointer;
+    display: flex;
+    gap: 10px;
+
+    &:hover {
+
+      svg {
+        opacity: 1;
+        scale: 1.2;
+      }
+
+      p {
+        transform: translate(0);
+        opacity: 1;
+      }
+    }
+
+    svg {
+      width: 30px;
+      height: 30px;
+      fill: white;
+      opacity: .4;
+      transition: .3s;
+    }
+
+    p {
+      font-size: 20px;
+      font-weight: 500;
+      transform: translateX(-50px);
+      transition: .3s;
+      opacity: 0;
+    }
+  }
+
+
+  video {
+    height: 101vh !important;
+    object-fit: cover;
+  }
+
+  .navigationContainer {
+    position: absolute;
+    bottom: -140px;
+    left: 0;
+    width: 100%;
+    padding: 0 25px;
+    transition: scale .7s, bottom .5s;
+    scale: 1.1;
+  }
+
+  .navigationContainerActive {
+    bottom: 40px;
+    scale: 1;
+  }
+
+  input {
+    border-radius: 8px;
+    height: 3px;
+    width: 100%;
+    accent-color: #e50914;
+  }
+
+  .controlButtons {
+    margin: 30px 0 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    button {
+      background: transparent;
+      opacity: .2;
+      transition: .3s;
+
+      &:hover {
+        opacity: 1;
+        scale: 1.2;
+      }
+
+      svg {
+        fill: white;
+        width: 25px;
+        height: 25px;
+
+      }
+    }
+
+    .left {
+      display: flex;
+      gap: 25px;
+
+      .plus {
+        transform: rotate(90deg);
+        transform: scaleX(-1);
+      }
+
+      .sound {
+        position: relative;
+
+        &:hover {
+          input {
+            opacity: 1;
+          }
+        }
+
+        input {
+          cursor: pointer;
+          position: absolute;
+          left: -100%;
+          top: -50px;
+          transform: rotate(-90deg);
+          width: 70px;
+          height: 5px;
+          opacity: 0;
+        }
+      }
+    }
+
+    .right {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 25px;
+
+      .episodes {
+        position: absolute;
+        left: -30px;
+        bottom: 50px;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        max-width: 180px;
+        text-align: left;
+        background: #333333;
+        padding: 10px 0;
+        border-radius: 4px;
+
+        .active {
+          cursor: default;
+          background: #565656;
+        }
+        span {
+          max-width: 150px;
+          font-size: 13px;
+          cursor: pointer;
+
+          padding: 10px;
+
+          &:hover {
+            background: #565656;
+          }
+        }
+      }
+    }
+  }
+
+
+}
+

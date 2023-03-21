@@ -15,8 +15,10 @@ import Lock from '../../ui/icons/Lock';
 import UserService from '../../../services/fetchServices/userFetch';
 import PinWindow from './pinWindow';
 import { fetchAuthUser } from '../../../store/counter/userSlice';
+import { useNavigate } from 'react-router-dom';
 
 const SelectUserLayout: FC = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [pinOpen, setPinOpen] = useState({ isOpen: false, userId: 0 });
   const [editUser, setEditUser] = useState({ isOpen: false, username: '', id: 0, isPin: false });
@@ -44,6 +46,7 @@ const SelectUserLayout: FC = () => {
       const { data } = await UserService.loginUser(el.id, 1337);
       localStorage.setItem('userToken', data.token);
       dispatch(fetchAuthUser());
+      navigate('/');
     } else {
       setPinOpen({ ...pinOpen, isOpen: true, userId: el.id });
     }

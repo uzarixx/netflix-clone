@@ -63,4 +63,38 @@ export default class UserService {
       token,
     });
   }
+
+  static async createForgotToken(email: string) {
+    return $api.post('/token/create-forgot-token', {
+      email,
+    });
+  }
+
+  static async verifyForgotToken(token: string) {
+    return $api.get(`/token/verify-forgot-token?token=${token}`);
+  }
+
+  static async loginAndUpdatePassword(token: string, password: string) {
+    return $api.post('/auth/login-and-update-password', {
+      token, password,
+    });
+  }
+
+  static async updatePassword(password: string, currentPassword: string) {
+    return $api.post('/accounts/update-password', {
+      password, currentPassword,
+    });
+  }
+
+  static async reqDisableTwoFactor() {
+    return $api.post('/accounts/req-disable-two-factor');
+  }
+
+  static async enableTwoFactor() {
+    return $api.put('/accounts/enable-two-factor');
+  }
+
+  static async verifyDisableTwoFactor(token: string) {
+    return $api.get(`/accounts/verify-disabled-two-factor/${token}`);
+  }
 }

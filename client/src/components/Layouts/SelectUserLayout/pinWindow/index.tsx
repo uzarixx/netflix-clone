@@ -6,6 +6,7 @@ import UserService from '../../../../services/fetchServices/userFetch';
 import { useAppDispatch } from '../../../../store/store';
 import { fetchAuthUser } from '../../../../store/counter/userSlice';
 import PinInputComponent from '../../../ui/inputs/pinInput';
+import { useNavigate } from 'react-router-dom';
 
 interface props {
   id: number;
@@ -13,6 +14,7 @@ interface props {
 }
 
 const PinWindow: FC<props> = ({ id, onClose }) => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [pin, setPin] = useState('');
   const [message, setMessage] = useState('');
@@ -23,6 +25,7 @@ const PinWindow: FC<props> = ({ id, onClose }) => {
         localStorage.setItem('userToken', data.token);
         dispatch(fetchAuthUser());
         onCloseWindow();
+        navigate('/');
       } catch (e: any) {
         console.log(e);
         setMessage(e.response.data.message);

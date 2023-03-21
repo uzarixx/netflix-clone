@@ -29,11 +29,17 @@ const Header: FC = () => {
   const onLogout = () => {
     dispatch(setAccount(null));
     dispatch(setUser(null));
+    localStorage.removeItem('userToken');
+    localStorage.removeItem('token');
   };
 
   const onChangeUser = () => {
     dispatch(setUser(null));
     localStorage.removeItem('userToken');
+  };
+
+  const onClickAccount = () => {
+    navigate('/profile');
   };
   return (
     <header className={styles.header}>
@@ -58,7 +64,7 @@ const Header: FC = () => {
             <div ref={ref} className={`${styles.settings} ${openSettings && styles.settingsOpen}`}
                  onClick={(e) => e.stopPropagation()}>
               <ul>
-                <li>Profile</li>
+                <li onClick={onClickAccount}>Profile</li>
                 <li onClick={onChangeUser}>Change profile</li>
                 <li onClick={onLogout}>Logout</li>
               </ul>

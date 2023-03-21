@@ -58,9 +58,10 @@ const LoginLayout: FC = () => {
   };
   const onClickError = () => {
     if (isLogin) {
-      changeLoginType();
+      navigate('/login-help');
     } else {
-      navigate('forgot-password');
+      changeLoginType();
+
     }
   };
   return (
@@ -90,7 +91,7 @@ const LoginLayout: FC = () => {
             <FormInput placeholder={'Password'} name={'password'} error={methods.formState.errors} type={'password'}
                        value={methods.watch('password')} />
             <SubmitButton type={'submit'}>{isLogin ? 'Sign In' : 'Sign Up'}</SubmitButton>
-            <span className={styles.needHelp}>Need help?</span>
+            <Link to={'login-help'} className={styles.needHelp}>Need help?</Link>
             <div className={styles.newToNetflix}><p>{isLogin ? 'New to Netflix?' : 'Have account?'}</p>
               <span onClick={changeLoginType}>{isLogin ? 'Sign up now.' : 'Sign in now.'}</span></div>
           </FormProvider>

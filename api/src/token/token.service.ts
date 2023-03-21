@@ -5,6 +5,8 @@ import { Tokens } from './token.model';
 import * as uuid from 'uuid';
 import { MailService } from '../services/mail/mail.service';
 import { AccountsService } from '../accounts/accounts.service';
+import { CreateForgotTokenDto } from './dto/create-forgot-token.dto';
+import { VerifyForgotTokenDto } from './dto/verify-forgot-token.dto';
 
 @Injectable()
 export class TokenService {
@@ -66,6 +68,40 @@ export class TokenService {
     }
     await this.tokensRepository.destroy({ where: { token } });
     return tokenFind;
+  }
+
+
+  async createForgotToken(dto: CreateForgotTokenDto) {
+    const token = uuid.v4();
+    const account = await this.accountsService.getAccountByEmail(dto.email);
+    if (!account) {
+      throw new HttpException('User is not exist', HttpStatus.NOT_FOUND);
+    }
+    await this.tokensRepository.create({
+      userId: account.id,
+      token,
+      isVerify: false,
+      expiresAt: Date.now() + 1000 * 60 * 5,
+    });
+    await this.mailService.forgotToken(`http://localhost:3000/reset-password?token=${token}`, dto.email);
+    return 'success';
+  }
+
+  async verifyForgotToken(tokenValue: string) {
+    const token = await this.tokensRepository.findOne({ where: { token: tokenValue } });
+    if (!token || Number(token.expiresAt) < Date.now()) {
+      throw new HttpException('Token is not a found', HttpStatus.BAD_REQUEST);
+    }
+    const account = await this.accountsService.getAccountById(token.userId);
+    return account.email;
+  }
+
+  async findAccountByToken(token: string) {
+    const tokenResult = await this.tokensRepository.findOne({ where: { token } });
+    if (!tokenResult || Number(tokenResult.expiresAt) < Date.now()) {
+      throw new HttpException('Token is not a found', HttpStatus.BAD_REQUEST);
+    }
+    return this.accountsService.getAccountById(tokenResult.userId);
   }
 
 }

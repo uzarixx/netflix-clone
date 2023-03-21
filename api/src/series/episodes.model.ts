@@ -31,11 +31,11 @@ export class Episodes extends Model<Episodes, EpisodesCreationAttrs> {
   numberSeason: number;
   @Column({ type: DataType.STRING, allowNull: false })
   name: string;
-  @Column({ type: DataType.STRING, allowNull: false })
+  @Column({ type: DataType.TEXT, allowNull: false })
   description: string;
-  @Column({ type: DataType.STRING, allowNull: false })
+  @Column({ type: DataType.TEXT, allowNull: false })
   videoLink: string;
-  @Column({ type: DataType.STRING, allowNull: false })
+  @Column({ type: DataType.TEXT, allowNull: false })
   imageLink: string;
   @Column({ type: DataType.INTEGER, allowNull: false })
   length: number;

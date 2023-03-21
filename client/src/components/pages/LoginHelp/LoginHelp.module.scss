@@ -1,0 +1,89 @@
+.loginHelpContainer {
+  background: url("https://assets.nflxext.com/ffe/siteui/acquisition/login/login-the-crown_2-1500x1000.jpg");
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+  background-size: cover;
+
+  .header {
+    min-height: 90px;
+    padding: 0 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    svg {
+      width: 166px;
+      height: 45px;
+    }
+
+    a {
+      font-size: 19.2px;
+      color: #E50914;
+      font-weight: 500;
+    }
+  }
+
+  .formWrapper {
+    padding: 40px;
+    background: #F3F3F3;
+    margin: 80px auto;
+    max-width: 460px;
+
+    h1 {
+      font-size: 32px;
+      color: #333333;
+      margin-bottom: 20px;
+    }
+
+    .errorNotFound {
+      padding: 20px 10px;
+      margin: 10px 0;
+      width: 100%;
+      background: #ffa00a;
+      color: white;
+      text-align: center;
+      border-radius: 2px;
+    }
+
+    p {
+      font-size: 16px;
+      color: #333;
+      font-weight: 400;
+      margin-bottom: 16px;
+    }
+
+    input {
+      padding: 10px;
+      box-sizing: border-box;
+      border: 1px solid #b3b3b3;
+      font-size: 16px;
+      width: 100%;
+      height: 44px;
+      margin-bottom: 24px;
+
+      &::placeholder {
+        font-size: 16px;
+      }
+    }
+
+    .active {
+      border: 1px solid #E50914;
+    }
+
+    .errorMessage {
+      transform: translateY(-20px);
+      font-size: 13px;
+      color: #e50914;
+    }
+
+    button {
+      padding: 14px 40px;
+      background: #0080FF;
+      color: white;
+      font-size: 20px;
+      width: 100%;
+    }
+  }
+}

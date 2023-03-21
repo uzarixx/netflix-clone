@@ -1,0 +1,20 @@
+.twoFactorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+
+  svg {
+    width: 140px;
+    height: 40px;
+  }
+  h3 {
+    font-size: 30px;
+    margin-top: 20px;
+  }
+
+  a {
+    color: white;
+  }
+}

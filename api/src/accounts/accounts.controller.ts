@@ -1,8 +1,10 @@
-import { Controller, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, UseGuards, UsePipes } from '@nestjs/common';
 import { AccountsService } from './accounts.service';
 import { JwtAuthGuard } from '../guard/jwt-auth.guard';
 import { UserAuth } from '../guard/get-auth.decorator';
 import { Accounts } from './accounts.model';
+import { ValidationPipe } from '../pipes/validation.pipe';
+import { UpdatePasswordDto } from './dto/update-password.dto';
 
 @Controller('accounts')
 export class AccountsController {
@@ -31,6 +33,13 @@ export class AccountsController {
   @Get('/get-me')
   getAuthUser(@UserAuth() account: Accounts) {
     return this.accountsService.getAuthUser(account);
+  }
+
+  @UsePipes(ValidationPipe)
+  @UseGuards(JwtAuthGuard)
+  @Post('/update-password')
+  updatePassword(@Body() dto: UpdatePasswordDto, @UserAuth() account: Accounts) {
+    return this.accountsService.updatePassword(dto, account);
   }
 
 }

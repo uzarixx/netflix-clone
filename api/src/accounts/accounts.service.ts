@@ -3,6 +3,8 @@ import { Accounts } from './accounts.model';
 import { InjectModel } from '@nestjs/sequelize';
 import { TokenService } from '../token/token.service';
 import { Users } from '../users/users.model';
+import * as bcrypt from 'bcrypt';
+import { UpdatePasswordDto } from './dto/update-password.dto';
 
 @Injectable()
 export class AccountsService {
@@ -65,6 +67,7 @@ export class AccountsService {
     }
     const account = await this.accountsRepository.findOne({
       where: { id: tokenFind.userId },
+      include: [{ model: Users, attributes: { exclude: ['pin'] } }],
       attributes: { exclude: ['password'] },
     });
     account.twoFactor = false;
@@ -79,9 +82,24 @@ export class AccountsService {
       attributes: { exclude: ['password'] },
     });
     if (!accountResponse) {
-      throw new HttpException('User is not a found', HttpStatus.BAD_REQUEST);
+      throw new HttpException('User is not a found', HttpStatus.NOT_FOUND);
     }
     return accountResponse;
+  }
+
+  async updatePassword(dto: UpdatePasswordDto, account: Accounts) {
+    const candidate = await this.accountsRepository.findOne({ where: { id: account.id } });
+    if (!candidate) {
+      throw new HttpException('User is not a found', HttpStatus.NOT_FOUND);
+    }
+    const decodePassword = await bcrypt.compare(dto.currentPassword, candidate.password);
+    if (!decodePassword) {
+      throw new HttpException('Password is not a valid', HttpStatus.BAD_REQUEST);
+    }
+    const hashPassword = await bcrypt.hash(dto.password, 7);
+    candidate.password = hashPassword;
+    await candidate.save();
+    return 'success';
   }
 
 

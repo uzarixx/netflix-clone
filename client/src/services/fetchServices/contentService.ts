@@ -6,7 +6,7 @@ export default class ContentService {
     return $api.get('/content');
   }
 
-  static async fetchSeries(id: string) {
+  static async getContent(id: string) {
     return $api.get(`/content/get-content/${id}`);
   }
 }
